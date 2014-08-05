@@ -1,20 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Jul 25 02:07:28 2014
 
-@author: Alexander
-"""
-import os
-import sqlite3
-from pprint import *
-os.chdir('C:\\Users\\Alexander\\Documents\\Clubs\\HMMT\\Addresses\\databases')
-#create database file
-database = raw_input('Enter database name (no extension)')
-connection = sqlite3.connect(database+'.db')
-cursor = connection.cursor()
-
-#insert SQL script here (2004_f)
-cursor.executescript('''
 CREATE TABLE IF NOT EXISTS organizations (
   id int(11) NOT NULL,
   `name` text,
@@ -62,11 +46,3 @@ INSERT INTO organizations (id, name, email, address, paid, comment) VALUES(34, '
 INSERT INTO organizations (id, name, email, address, paid, comment) VALUES(35, 'Ward Melville High School', NULL, NULL, NULL, NULL);
 INSERT INTO organizations (id, name, email, address, paid, comment) VALUES(36, 'West Windsor-Plainsboro High School', NULL, NULL, NULL, NULL);
 INSERT INTO organizations (id, name, email, address, paid, comment) VALUES(37, 'Weymouth High School', NULL, NULL, NULL, NULL);
-
-''')
-
-for row in cursor.execute('SELECT id, name, address FROM organizations'):
-    pprint(row)
-connection.commit()
-connection.close()
-print "Done!"
